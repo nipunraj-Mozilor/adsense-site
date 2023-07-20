@@ -40,10 +40,7 @@
             // adSense.async = true;
 
             // document.head.appendChild(adSense);
-            const newElement = document.createElement("div");
-            newElement.style.background = "blue"; // Replace this with the actual path to your background image
-            newElement.style.width = "100px"; // Set the width (adjust as needed)
-            newElement.style.height = "100px";
+            document.body.style.backgroundColor = "red";
           } else {
             console.log("in the events");
             document.addEventListener(
@@ -51,10 +48,7 @@
               function (eventData) {
                 const data = eventData.detail;
                 if (data.accepted.includes("analytics")) {
-                  const newElement = document.createElement("div");
-                  newElement.style.background = "blue"; // Replace this with the actual path to your background image
-                  newElement.style.width = "100px"; // Set the width (adjust as needed)
-                  newElement.style.height = "100px";
+                  document.body.style.backgroundColor = "blue";
                 }
               }
             );
