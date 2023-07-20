@@ -52,22 +52,22 @@
 
             console.log("reading cookie if condition");
             document.body.style.backgroundColor = "red";
-          } else {
+          } else if (cookieObj.analytics === "no") {
             document.body.style.backgroundColor = "yellow";
             console.log("reading cookie else condition");
+          } else {
+            console.log("banner events");
+            document.addEventListener(
+              "cookieyes_consent_update",
+              function (eventData) {
+                const data = eventData.detail;
+                if (data.accepted.includes("analytics")) {
+                  document.body.style.backgroundColor = "blue";
+                }
+              }
+            );
           }
         }
-      } else {
-        console.log("banner events");
-        document.addEventListener(
-          "cookieyes_consent_update",
-          function (eventData) {
-            const data = eventData.detail;
-            if (data.accepted.includes("analytics")) {
-              document.body.style.backgroundColor = "blue";
-            }
-          }
-        );
       }
     </script>
   </body>
