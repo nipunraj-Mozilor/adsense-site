@@ -50,21 +50,24 @@
 
             // document.head.appendChild(adSense);
 
-            console.log(document.body);
+            console.log("reading cookie if condition");
             document.body.style.backgroundColor = "red";
           } else {
-            console.log("in the events");
-            document.addEventListener(
-              "cookieyes_consent_update",
-              function (eventData) {
-                const data = eventData.detail;
-                if (data.accepted.includes("analytics")) {
-                  document.body.style.backgroundColor = "blue";
-                }
-              }
-            );
+            document.body.style.backgroundColor = "yellow";
+            console.log("reading cookie else condition");
           }
         }
+      } else {
+        console.log("banner events");
+        document.addEventListener(
+          "cookieyes_consent_update",
+          function (eventData) {
+            const data = eventData.detail;
+            if (data.accepted.includes("analytics")) {
+              document.body.style.backgroundColor = "blue";
+            }
+          }
+        );
       }
     </script>
   </body>
