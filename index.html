@@ -13,11 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>adsense</title>
 
-    <script
+    <!-- <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731933074639437"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
   </head>
   <body>
     hello world
@@ -41,20 +41,12 @@
             cookieObj[key] = value;
           });
           if (cookieObj.analytics === "yes") {
-            console.log("inside the cookieyes consent cookie");
-            // const adSense = document.createElement("script");
-            // adSense.src =
-            //   "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731933074639437";
-            // adSense.crossorigin = "anonymous";
-            // adSense.async = true;
-
-            // document.head.appendChild(adSense);
-
-            console.log("reading cookie if condition");
-            document.body.style.backgroundColor = "red";
-          } else if (cookieObj.analytics === "no") {
-            document.body.style.backgroundColor = "yellow";
-            console.log("reading cookie else condition");
+            const adSense = document.createElement("script");
+            adSense.src =
+              "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731933074639437";
+            adSense.crossorigin = "anonymous";
+            adSense.async = true;
+            document.head.appendChild(adSense);
           } else {
             console.log("banner events");
             document.addEventListener(
@@ -62,7 +54,12 @@
               function (eventData) {
                 const data = eventData.detail;
                 if (data.accepted.includes("analytics")) {
-                  document.body.style.backgroundColor = "blue";
+                  const adSense = document.createElement("script");
+                  adSense.src =
+                    "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731933074639437";
+                  adSense.crossorigin = "anonymous";
+                  adSense.async = true;
+                  document.head.appendChild(adSense);
                 }
               }
             );
