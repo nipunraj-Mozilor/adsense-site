@@ -21,6 +21,7 @@
           {}
         );
       const cookieYesConsent = cookies["cookieyes-consent"];
+      let analyticsConsent = false;
       if (cookieYesConsent) {
         const cookiePairs = cookieYesConsent
           .split(",")
@@ -31,41 +32,28 @@
           cookieObj[key] = value;
         });
         if (cookieObj.analytics === "yes") {
-          const adSense = document.createElement("script");
-          adSense.src = "<url here>";
-          adSense.crossorigin = "anonymous";
-          adSense.async = true;
-          document.head.appendChild(adSense);
-        } else {
-          document.addEventListener(
-            "cookieyes_consent_update",
-            function (eventData) {
-              const data = eventData.detail;
-              if (data.accepted.includes("analytics")) {
-                const adSense = document.createElement("script");
-                adSense.src = "<url here>";
-                adSense.crossorigin = "anonymous";
-                adSense.async = true;
-                document.head.appendChild(adSense);
-              }
-            }
-          );
+          analyticsConsent = true;
         }
+      }
+      if (analyticsConsent) {
+        addScript();
       } else {
-        console.log("banner events");
         document.addEventListener(
           "cookieyes_consent_update",
           function (eventData) {
             const data = eventData.detail;
             if (data.accepted.includes("analytics")) {
-              const adSense = document.createElement("script");
-              adSense.src = "<url here>";
-              adSense.crossorigin = "anonymous";
-              adSense.async = true;
-              document.head.appendChild(adSense);
+              addScript();
             }
           }
         );
+      }
+      function addScript() {
+        const adSense = document.createElement("script");
+        adSense.src = "<url here>";
+        adSense.crossorigin = "anonymous";
+        adSense.async = true;
+        document.head.appendChild(adSense);
       }
     </script>
   </head>
