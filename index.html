@@ -13,11 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>adsense</title>
 
-    <!-- <script
+    <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731933074639437"
       crossorigin="anonymous"
-    ></script> -->
+    ></script>
   </head>
   <body>
     hello world
@@ -29,42 +29,52 @@
             Object.assign(ac, { [cv.split("=")[0]]: cv.split("=")[1] }),
           {}
         );
-      if (cookies.hasOwnProperty("cookieyes-consent")) {
-        const cookieYesConsent = cookies["cookieyes-consent"];
-        if (cookieYesConsent) {
-          const cookiePairs = cookieYesConsent
-            .split(",")
-            .map((pair) => pair.trim());
-          const cookieObj = {};
-          cookiePairs.forEach((pair) => {
-            const [key, value] = pair.split(":");
-            cookieObj[key] = value;
-          });
-          if (cookieObj.analytics === "yes") {
-            const adSense = document.createElement("script");
-            adSense.src =
-              "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731933074639437";
-            adSense.crossorigin = "anonymous";
-            adSense.async = true;
-            document.head.appendChild(adSense);
-          } else {
-            console.log("banner events");
-            document.addEventListener(
-              "cookieyes_consent_update",
-              function (eventData) {
-                const data = eventData.detail;
-                if (data.accepted.includes("analytics")) {
-                  const adSense = document.createElement("script");
-                  adSense.src =
-                    "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4731933074639437";
-                  adSense.crossorigin = "anonymous";
-                  adSense.async = true;
-                  document.head.appendChild(adSense);
-                }
+      const cookieYesConsent = cookies["cookieyes-consent"];
+      if (cookieYesConsent) {
+        const cookiePairs = cookieYesConsent
+          .split(",")
+          .map((pair) => pair.trim());
+        const cookieObj = {};
+        cookiePairs.forEach((pair) => {
+          const [key, value] = pair.split(":");
+          cookieObj[key] = value;
+        });
+        if (cookieObj.analytics === "yes") {
+          const adSense = document.createElement("script");
+          adSense.src = "<url here>";
+          adSense.crossorigin = "anonymous";
+          adSense.async = true;
+          document.head.appendChild(adSense);
+        } else {
+          document.addEventListener(
+            "cookieyes_consent_update",
+            function (eventData) {
+              const data = eventData.detail;
+              if (data.accepted.includes("analytics")) {
+                const adSense = document.createElement("script");
+                adSense.src = "<url here>";
+                adSense.crossorigin = "anonymous";
+                adSense.async = true;
+                document.head.appendChild(adSense);
               }
-            );
-          }
+            }
+          );
         }
+      } else {
+        console.log("banner events");
+        document.addEventListener(
+          "cookieyes_consent_update",
+          function (eventData) {
+            const data = eventData.detail;
+            if (data.accepted.includes("analytics")) {
+              const adSense = document.createElement("script");
+              adSense.src = "<url here>";
+              adSense.crossorigin = "anonymous";
+              adSense.async = true;
+              document.head.appendChild(adSense);
+            }
+          }
+        );
       }
     </script>
   </body>
